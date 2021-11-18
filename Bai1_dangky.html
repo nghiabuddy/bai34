@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" rel="alternate" media="only screen and (max-width: 640px)" />
+    <link href="./css/style_signin.css" rel="stylesheet" type="text/css" />
+    <title>Đăng ký</title>
+    <script>
+        var flag = true;
+
+        function checkformSignUp() {
+
+            var username = document.getElementById("username").value;
+            var firstpassword = document.getElementById("password1").value;
+            var secondpassword = document.getElementById("password2").value;
+            var image1 = document.getElementsByName("avatar");
+            if (username == '' || !/^[A-Za-z][a-zA-Z0-9]{6,15}$/.test(username)) {
+                document.getElementById("error1").style.color = "red";
+                document.getElementById("error1").innerHTML = "Vui lòng kiểm tra lại tên đăng nhập!";
+                flag = false;
+            }
+            if (firstpassword == '' || (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,15}$/).test(firstpassword)) {
+                document.getElementById("error2").style.color = "red";
+                document.getElementById("error2").innerHTML = "Vui lòng kiểm tra lại mật khẩu!";
+                flag = false;
+            }
+            if (secondpassword == '' || (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,15}$/).test(secondpassword)) {
+                document.getElementById("error3").style.color = "red";
+                document.getElementById("error3").innerHTML = "Vui lòng kiểm tra lại mật khẩu!";
+                flag = false;
+            }
+            if (firstpassword != secondpassword) {
+                alert("Mật khẩu phải giống nhau!");
+                flag = false;
+            }
+            if (image1.length == 0 || image1.length == "" || image1.length == null) {
+                document.getElementById("error4").style.color = "red";
+                document.getElementById("error4").innerHTML = "Vui lòng kiểm tra lại hình ảnh!";
+                flag = false;
+            }
+            return flag;
+        }
+        //check Existed
+
+        function showExisted(str) {
+            if (str.length == 0) {
+                document.getElementById("txt").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txt").innerHTML = this.responseText;
+
+                    }
+                };
+                xmlhttp.open("POST", "isExisted.php?q=" + str, true);
+                xmlhttp.send();
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#">Bài Tập</a></li>
+
+        <li class="dropdown">
+            <a class="dropbtn">Buổi 1</a>
+            <div class="dropdown-content">
+                <a href="buoi1/bai1.html">Bài 1</a>
+                <a href="buoi1/bai2.html">Bài 2</a>
+                <a href="buoi1/bai3.html">Bài 3</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a class="dropbtn">Buổi 2</a>
+            <div class="dropdown-content">
+                <a href="Buoi2_Bai2/bai1.html">Bài 1</a>
+                <a href="Buoi2_Bai2/div.html">Bài 2</a>
+                <a href="Buoi2_Bai3/index.html">Bài 3</a>
+
+            </div>
+        </li>
+        <li class="dropdown">
+            <a class="dropbtn">Buổi 3</a>
+            <div class="dropdown-content">
+                <a href="./Bai1_dangky.html">Bài 1-Đăng kí</a>
+                <a href="./Bai2_dangnhap.html">Bài 2-Đăng nhập</a>
+                <a href="./Bai3_themsp.php">Bài 3-Thêm sản phẩm</a>
+                <a href="./Bai4_danhsachsp.php">Bài 4-Danh sách sản phẩm</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a class="dropbtn">Buổi 4</a>
+            <div class="dropdown-content">
+                <a href="./Bai1_dangky.html">Bài 1-Đăng kí</a>
+                <a href="./Bai2_dangnhap.html">Bài 1-Đăng nhập</a>
+                <a href="./Buoi4_Bai2.html">Bài 2-Slider</a>
+                <a href="./Buoi4_Bai3.html">Bài 3-Timer</a>
+                <a href="./Buoi4_Bai4.php">Bài 4-Images from database</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a class="dropbtn">Buổi 5</a>
+            <div class="dropdown-content">
+                <a href="./Bai1_dangky.html">Bài 1-Existed User</a>
+                <a href="./Bai4_danhsachsp.php">Bài 2-Product's Details</a>
+                <a href="./Bai4_danhsachsp.php">Bài 3-Popup Image</a>
+                <a href="./Bai4_danhsachsp.php">Bài 4-Livesearch</a>
+            </div>
+        </li>
+    </ul>
+    <br>
+    <p>
+        Chung Hiếu Nghĩa
+    </p>
+    <p>
+        B1805642
+    </p>
+    <center style="color: red;">
+        <h2>Đăng kí tài khoản mới</h2>
+    </center>
+    <p>
+        <center>Vui lòng điền đầy đủ thông tin bên dưới để đăng kí tài khoản mới</center>
+    </p>
+
+    <div class="main">
+        <form action="dangky_xuly.php" method="POST" enctype="multipart/form-data" onsubmit="return checkformSignUp()">
+            <table style="border: 1px solid black;" align="center">
+                <th align="center">
+
+                    <table bgcolor="lightgrey" style="border: 1px solid black;" align="center">
+                        <td width="50%">Tên đăng nhập</td>
+                        <td><input type="text" maxlength="50" name="username" id="username" onchange="showExisted(this.value)"></td>
+                        <tr>
+                            <td></td>
+                            <td id="error1"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="txt"></td>
+                        </tr>
+                        <tr>
+                            <td>Mật khẩu</td>
+                            <td><input type="password" name="pass" id="password1"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="error2"></td>
+                        </tr>
+                        <tr>
+                            <td>Gõ lại mật khẩu</td>
+                            <td><input type="password" name="againpass" id="password2"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="error3"></td>
+                        </tr>
+                        <tr>
+                            <td>Hình đại diện</td>
+                            <td><input type="file" id="avatar" name="file" multiple></td>
+
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="error4"></td>
+                        </tr>
+                        <tr>
+                            <td>Giới tính</td>
+                            <td>
+                                <input type="radio" name="gender" value="Nam">Nam
+                                <input type="radio" name="gender" value="Nữ">Nữ
+                                <input type="radio" name="gender" value="Khác">Khác
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Nghề nghiệp</td>
+                            <td>
+                                <select name="subject">
+                        <option value="Học sinh">Học sinh</option>
+                        <option value="Sinh viên">Sinh viên</option>
+                        <option value="Giáo viên">Giáo viên</option>
+                        <option value="Khác">Khác</option>
+                        </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+
+                            <td> Sở thích</td>
+                            <td>
+                                <br>
+                                <input type="checkbox" name="sothich[]" value="Thể thao">Thể thao
+                                <input type="checkbox" name="sothich[]" value="Du lịch">Du Lịch
+                                <input type="checkbox" name="sothich[]" value="Âm nhạc">Âm nhạc
+                                <br>
+                                <input type="checkbox" name="sothich[]" value="Thời trang">Thời trang
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <br>
+                                <input type="submit" value="Đăng kí">
+                                <input type="reset" value="Làm lại ">
+                            </td>
+                        </tr>
+                        </tr>
+                    </table>
+
+                </th>
+            </table>
+        </form>
+    </div>
+    <br>
+    <footer>
+        <table>
+            <div class="lienhe">
+                <table>
+                    <tr align="center">
+                        <td>
+                            <a href="https://www.facebook.com/hieunghia15" target="blank">
+                                <img src="./image/facebook.png" alt="facebook" width="10%"></a>
+                        </td>
+                        <td>
+                            <a href="https://www.instagram.com/n_nghiabuddy/" target="blank">
+                                <img src="./image/instagram.png" alt="Instagram" width="10%"></a>
+                        </td>
+                        <td>
+                            <a href="https://twitter.com/nghia_buddy" target="blank">
+                                <img src="./image/twitter.png" alt="Twitter" width="10%"></a>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <p><strong>
+                <center>© 2021 Copyright | Design by Nghia Buddy</center>
+            </strong></p>
+            </tr>
+            </div>
+        </table>
+    </footer>
+
+</body>
+
+</html>
